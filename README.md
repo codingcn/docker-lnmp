@@ -35,6 +35,11 @@ git clone https://github.com/codingcn/docker-lnmp.git
 cd docker-lnmp
 docker-compose up -d
 ```
+
+使用composer
+```
+docker run -v $(pwd -P):/usr/www/html -it dockerlnmp_php composer
+```
 配置文件`./config/...`
 
 >作者实测，配置好点的服务器，可实现三分钟搭建好lnmp，很爽有木有！
