@@ -17,9 +17,7 @@ services:
 
   php:
     # Dockerfile 构建
-    build:
-      context: $PWD/
-      dockerfile: Dockerfile
+    build: $PWD/config/php/build
     volumes:
       #  网站根目录
       - /data/www:/www
