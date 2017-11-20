@@ -9,7 +9,7 @@ services:
       - php    
     volumes:
       # 同 php 一起共享 $PWD/data/www 目录
-      - php
+      # - $PWD/data/www:/www
       # nginx 配置文件
       - $PWD/config/nginx:/etc/nginx/conf.d:ro
 
@@ -51,5 +51,3 @@ services:
       - $PWD/config/mysql/mycustom.cnf:/etc/mysql/conf.d/custom.cnf:ro
       # mysql 数据库
       - $PWD/data/mysql:/var/lib/mysql
-volumes:
-  php: $PWD/data/www
