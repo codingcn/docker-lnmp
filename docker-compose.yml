@@ -45,7 +45,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     ports:
-      - 2333:3306
+      - 3306:3306
     volumes:
       # mysql 配置文件
       - $PWD/config/mysql/mycustom.cnf:/etc/mysql/conf.d/custom.cnf:ro
