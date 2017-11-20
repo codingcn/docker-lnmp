@@ -52,4 +52,4 @@ services:
       # mysql 数据库
       - $PWD/data/mysql:/var/lib/mysql
 volumes:
-  php:
+  php: $PWD/data/www
