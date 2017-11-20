@@ -7,3 +7,5 @@ RUN docker-php-ext-install pdo_mysql mysqli sockets opcache\
 ADD $PWD/config/php/build/composer.phar /usr/local/bin/composer
 RUN chmod 755 /usr/local/bin/composer
 	&& composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+#composer运行方法：docker run -v $(pwd -P):/usr/www/html -it dockerlnmp_php composer
