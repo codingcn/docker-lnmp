@@ -6,11 +6,10 @@ services:
       # 将主机的 8080 端口映射到容器的 80 端口
       - 8080:80
     links:
-      - php
-    # 同 php 一起共享 $PWD/data/www 目录
-    volumes_from:
-      - php
+      - php    
     volumes:
+      # 同 php 一起共享 $PWD/data/www 目录
+      - php
       # nginx 配置文件
       - $PWD/config/nginx:/etc/nginx/conf.d:ro
 
@@ -52,3 +51,5 @@ services:
       - $PWD/config/mysql/mycustom.cnf:/etc/mysql/conf.d/custom.cnf:ro
       # mysql 数据库
       - $PWD/data/mysql:/var/lib/mysql
+volumes:
+  php:
