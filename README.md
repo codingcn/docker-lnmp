@@ -1,4 +1,4 @@
-# docker-compose安装php+mysql+redis+composer
+# docker-compose安装nginx+php+mysql+redis+composer
 ### 前置条件
 ```
 docker
