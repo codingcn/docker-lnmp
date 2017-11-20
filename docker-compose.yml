@@ -3,15 +3,17 @@ services:
   nginx:
     image: nginx:1.13.6
     ports:
-      # 将主机的 8080 端口映射到容器的 80 端口
-      - 8080:80
+      # 将主机的 80 端口映射到容器的 80 端口
+      - 80:80
     links:
       - php    
     volumes:
-      # 同 php 一起共享 $PWD/data/www 目录
-      # - $PWD/data/www:/www
+      # 同 php 一起共享 /data/www 目录
+      - /data/www:/www
       # nginx 配置文件
       - $PWD/config/nginx:/etc/nginx/conf.d:ro
+      # nginx 日志
+      - /data/logs/www/:/var/log/nginx:rw
 
   php:
     # Dockerfile 构建
@@ -20,7 +22,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       #  网站根目录
-      - $PWD/data/www:/www
+      - /data/www:/www
       # php 配置文件
       - $PWD/config/php:/usr/local/etc/php:ro
     links:
@@ -35,7 +37,7 @@ services:
       # redis 配置文件
       - $PWD/config/redis:/etc/redis:ro
       # redis 持久化数据存储
-      - $PWD/data/redis:/data
+      - /data/redis:/data
     # 以配置文件启动 redis
     command: redis-server /etc/redis/redis.conf
 
@@ -50,4 +52,4 @@ services:
       # mysql 配置文件
       - $PWD/config/mysql/mycustom.cnf:/etc/mysql/conf.d/custom.cnf:ro
       # mysql 数据库
-      - $PWD/data/mysql:/var/lib/mysql
+      - /data/mysql:/var/lib/mysql

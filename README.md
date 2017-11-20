@@ -31,7 +31,7 @@ redis:4.0.2
 
 ### 开始使用
 ```
-https://github.com/codingcn/docker-lnmp.git
+git clone https://github.com/codingcn/docker-lnmp.git
 cd docker-lnmp
 docker-compose up -d
 ```
