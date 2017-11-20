@@ -1,4 +1,4 @@
-# docker-lnmp
+# docker-compose安装php+mysql+redis+composer
 ### 前置条件
 ```
 docker
@@ -40,6 +40,12 @@ docker-compose up -d
 ```
 docker run -v $(pwd -P):/usr/www/html -it dockerlnmp_php composer
 ```
-配置文件`./config/...`
+>或者不想每次使用composer都写那么一长串
+那么我们可以为主机添加一个别名
+
+```
+alias composer="docker run -v $(pwd -P):/usr/www/html -it dockerlnmp_php composer"
+```
+这样就可以直接在主机上`composer something...`
 
 >作者实测，配置好点的服务器，可实现三分钟搭建好lnmp，很爽有木有！
