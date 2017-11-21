@@ -20,6 +20,7 @@ services:
       - $PWD/config/nginx:/etc/nginx/conf.d:ro
       # nginx 日志
       - /data/logs/www/:/var/log/nginx:rw
+    restart: always
 
   php:
     # Dockerfile 构建
@@ -34,6 +35,7 @@ services:
     links:
       - db
       - redis
+    restart: always
 
   redis:
     image: redis:4.0.2
@@ -46,6 +48,7 @@ services:
       - /data/redis:/data
     # 以配置文件启动 redis
     command: redis-server /etc/redis/redis.conf
+    restart: always
 
   db:
     image: mysql:5.7.20
@@ -58,6 +61,7 @@ services:
       - 3307:3306
     volumes:
       # mysql 配置文件
-      - $PWD/config/mysql/mycustom.cnf:/etc/mysql/conf.d/custom.cnf:ro
+      - $PWD/config/mysql/conf.d:/etc/mysql/conf.d:ro
       # mysql 数据库
       - /data/mysql:/var/lib/mysql
+    restart: always
