@@ -2,7 +2,6 @@ version: "3"
 
 networks:
   lnmp:
-
 services:
   nginx:
     image: nginx:1.13.6
@@ -10,14 +9,16 @@ services:
       - lnmp
     ports:
       # 将主机的 80 端口映射到容器的 80 端口
-      - 81:80
+      - 80:80
+      # ssl 默认是443端口，因此需要将443端口映射到宿主机上
+      - 443:443
     links:
       - php    
     volumes:
       # 同 php 一起共享 /data/www 目录
-      - /data/www:/www
+      - /data/www:/data/www
       # nginx 配置文件
-      - $PWD/config/nginx:/etc/nginx/conf.d:ro
+      - $PWD/config/nginx/conf.d:/etc/nginx/conf.d:ro
       # nginx 日志
       - /data/logs/www/:/var/log/nginx:rw
     restart: always
@@ -29,7 +30,7 @@ services:
       - lnmp
     volumes:
       #  网站根目录
-      - /data/www:/www
+      - /data/www:/data/www
       # php 配置文件
       - $PWD/config/php:/usr/local/etc/php:ro
     links:
@@ -40,7 +41,7 @@ services:
   redis:
     image: redis:4.0.2
     ports:
-      - 6380:6379
+      - 6379:6379
     volumes:
       # redis 配置文件
       - $PWD/config/redis:/etc/redis:ro
@@ -58,7 +59,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     ports:
-      - 3307:3306
+      - 3306:3306
     volumes:
       # mysql 配置文件
       - $PWD/config/mysql/conf.d:/etc/mysql/conf.d:ro
