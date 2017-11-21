@@ -18,7 +18,7 @@ services:
       # 同 php 一起共享 /data/www 目录
       - /data/www:/data/www
       # nginx 配置文件
-      - $PWD/config/nginx/conf.d:/etc/nginx/conf.d:ro
+      - $PWD/config/nginx:/etc/nginx/conf.d:ro
       # nginx 日志
       - /data/logs/www/:/var/log/nginx:rw
     restart: always
