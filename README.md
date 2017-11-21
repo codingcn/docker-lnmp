@@ -47,14 +47,17 @@ docker run --rm -it \
 >或者不想每次使用composer都写那么一长串
 那么我们可以为主机添加一个别名
 
+
 ```
-#composer.sh
+vim  ~/alias/composer.sh
+
 #!/bin/bash
+docker run --rm -it -v $(pwd):/usr/src/app -v ~/.composer:/home/composer/.composer -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro composer $@
 
-docker run --rm -it -v $(pwd):/usr/src/app -v ~/.composer:/home/composer/.composer -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro graze/composer $@
 
-#~/.bashrc         命名alias
-alias composer="/home/ivan/alias/composer.sh"
+
+vim ~/.bashrc
+alias composer="~/alias/composer.sh"
 
 source ~/.bashrc
 
