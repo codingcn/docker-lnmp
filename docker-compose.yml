@@ -10,7 +10,7 @@ services:
       - lnmp
     ports:
       # 将主机的 80 端口映射到容器的 80 端口
-      - 80:80
+      - 81:80
     links:
       - php    
     volumes:
@@ -38,7 +38,7 @@ services:
   redis:
     image: redis:4.0.2
     ports:
-      - 6379:6379
+      - 6380:6379
     volumes:
       # redis 配置文件
       - $PWD/config/redis:/etc/redis:ro
@@ -55,7 +55,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     ports:
-      - 3306:3306
+      - 3307:3306
     volumes:
       # mysql 配置文件
       - $PWD/config/mysql/mycustom.cnf:/etc/mysql/conf.d/custom.cnf:ro
