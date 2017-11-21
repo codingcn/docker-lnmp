@@ -1,11 +1,11 @@
 FROM php:7.1.11-fpm
-RUN docker-php-ext-install pdo_mysql mysqli sockets opcache zip\
+RUN docker-php-ext-install pdo_mysql mysqli sockets opcache \
   && pecl install xdebug \
   && pecl install redis \
   && rm -rf /tmp/pear \
   && docker-php-ext-enable xdebug redis
 # 支持cpmposer 运行方法：docker run -v $(pwd -P):/usr/www/html -it dockerlnmp_php composer
-RUN apt-get update && apt-get install -y git curl wget cron\
+RUN apt-get update && apt-get install -y git curl wget cron zip unzip\
   && rm -rf /var/lib/apt/lists/* 
 RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer 
 # ADD composer.phar /usr/local/bin/composer
