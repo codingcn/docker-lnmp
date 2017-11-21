@@ -49,10 +49,14 @@ docker run --rm -it \
 
 
 ```
+mkdir ~/alias
 vim  ~/alias/composer.sh
 
 #!/bin/bash
 docker run --rm -it -v $(pwd):/usr/src/app -v ~/.composer:/home/composer/.composer -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro composer $@
+
+
+chmod +x  ~/alias/composer.sh
 
 
 
