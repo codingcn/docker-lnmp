@@ -58,6 +58,7 @@ services:
     # 配置环境变量
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ROOT_HOST: "%"
     ports:
       - 3306:3306
     volumes:
@@ -67,4 +68,5 @@ services:
       - /data/mysql:/var/lib/mysql
       # mysql 日志
       - /data/log/mysql:/var/log/mysql
+    command: chown mysql:root /var/log/mysql
     restart: always
