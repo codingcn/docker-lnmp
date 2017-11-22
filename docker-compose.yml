@@ -65,4 +65,6 @@ services:
       - $PWD/config/mysql/conf.d:/etc/mysql/conf.d:ro
       # mysql 数据库
       - /data/mysql:/var/lib/mysql
+      # mysql 日志
+      - /data/logs/mysql:/var/log/mysql:rw
     restart: always
