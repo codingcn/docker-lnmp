@@ -20,7 +20,7 @@ services:
       # nginx 配置文件
       - $PWD/config/nginx:/etc/nginx/conf.d:ro
       # nginx 日志
-      - /data/logs/www/:/var/log/nginx:rw
+      - /data/log/www/:/var/log/nginx:rw
     restart: always
 
   php:
@@ -66,5 +66,5 @@ services:
       # mysql 数据库
       - /data/mysql:/var/lib/mysql
       # mysql 日志
-      - /data/logs/mysql:/var/log/mysql:rw
+      - /data/log/mysql:/var/log/mysql
     restart: always
