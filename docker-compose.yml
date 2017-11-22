@@ -68,5 +68,5 @@ services:
       - /data/mysql:/var/lib/mysql
       # mysql 日志
       - /data/log/mysql:/var/log/mysql
-    command: mkdir /var/log/mysql && chown mysql:root /var/log/mysql
+    command: chown mysql:root /var/log/mysql
     restart: always
