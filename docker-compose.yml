@@ -25,14 +25,14 @@ services:
 
   php:
     # Dockerfile 构建
-    build: $PWD/config/php/build
+    build: $PWD/build/php
     networks:
       - lnmp
     volumes:
       #  网站根目录
       - /data/www:/data/www
       # php 配置文件
-      - $PWD/config/php:/usr/local/etc/php:ro
+      - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
     links:
       - db
       - redis
@@ -46,7 +46,7 @@ services:
       # redis 配置文件
       - $PWD/config/redis:/etc/redis:ro
       # redis 持久化数据存储
-      - /data/redis:/data
+      - /data/redis:/data/redis
     # 以配置文件启动 redis
     command: redis-server /etc/redis/redis.conf
     restart: always
