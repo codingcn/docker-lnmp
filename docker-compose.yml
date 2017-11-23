@@ -1,7 +1,4 @@
 version: "3"
-
-networks:
-  lnmp:
 services:
   nginx:
     image: nginx:1.13.6
@@ -32,7 +29,7 @@ services:
       # php 配置文件
       - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
     links:
-      - mysql
+      - mysql:db
       - redis
     restart: always
 
