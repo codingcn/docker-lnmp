@@ -1,5 +1,6 @@
 FROM php:7.1.11-fpm
 RUN docker-php-ext-install pdo_mysql mysqli sockets opcache \
+  && docker-php-ext-configure --with-mysql-sock=/var/run/mysqld/mysqld.sock \
   && pecl install xdebug \
   && pecl install redis \
   && rm -rf /tmp/pear \

@@ -69,7 +69,7 @@ services:
       # mysql 配置文件
       - $PWD/config/mysql/conf.d:/etc/mysql/conf.d:ro
       # mysql 数据库
-      - /data/mysql:/var/lib/mysql
+      - /data/mysql:/var/lib/mysql:rw
       # mysql 日志
-      - /data/log/mysql:/var/log/mysql
+      - /data/log/mysql:/var/log/mysql:rw
     restart: always
