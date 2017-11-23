@@ -5,6 +5,7 @@ networks:
 services:
   nginx:
     image: nginx:1.13.6
+    container_name: nginx
     networks:
       - lnmp
     ports:
@@ -26,6 +27,7 @@ services:
   php:
     # Dockerfile 构建
     build: $PWD/build/php
+    container_name: php
     networks:
       - lnmp
     volumes:
@@ -40,6 +42,7 @@ services:
 
   redis:
     image: redis:4.0.2
+    container_name: redis
     ports:
       - 6379:6379
     volumes:
@@ -53,6 +56,7 @@ services:
 
   mysql:
     image: mysql:5.7.20
+    container_name: mysql
     networks:
       - lnmp
     # 配置环境变量
