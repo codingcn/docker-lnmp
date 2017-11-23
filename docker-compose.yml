@@ -34,7 +34,7 @@ services:
       # php 配置文件
       - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
     links:
-      - db
+      - mysql:mysql
       - redis
     restart: always
 
@@ -51,7 +51,7 @@ services:
     command: redis-server /etc/redis/redis.conf
     restart: always
 
-  db:
+  mysql:
     image: mysql:5.7.20
     networks:
       - lnmp
