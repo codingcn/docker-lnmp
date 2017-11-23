@@ -6,8 +6,6 @@ services:
   nginx:
     image: nginx:1.13.6
     container_name: nginx
-    networks:
-      - lnmp
     ports:
       # 将主机的 80 端口映射到容器的 80 端口
       - 80:80
@@ -28,15 +26,13 @@ services:
     # Dockerfile 构建
     build: $PWD/build/php
     container_name: php
-    networks:
-      - lnmp
     volumes:
       #  网站根目录
       - /data/www:/data/www
       # php 配置文件
       - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
     links:
-      - mysql:mysql
+      - mysql
       - redis
     restart: always
 
@@ -57,8 +53,6 @@ services:
   mysql:
     image: mysql:5.7.20
     container_name: mysql
-    networks:
-      - lnmp
     # 配置环境变量
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
