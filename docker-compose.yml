@@ -28,6 +28,7 @@ services:
       - /data/www:/data/www
       # php 配置文件
       - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
+      - /tmp:/tmp:rw
     links:
       - mysql:db
       - redis
@@ -65,4 +66,5 @@ services:
       - /data/mysql:/var/lib/mysql:rw
       # mysql 日志
       - /data/log/mysql:/var/log/mysql:rw
+      - /tmp:/tmp:rw
     restart: always
