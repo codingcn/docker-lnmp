@@ -20,7 +20,7 @@ services:
     restart: always
 
   mysql:
-    image: mysql:5.7.20
+    build: $PWD/build/mysql
     container_name: mysql
     # 配置环境变量
     environment:
@@ -36,7 +36,7 @@ services:
       # mysql 数据库
       - /data/mysql:/var/lib/mysql:rw
       # mysql 日志
-      - /data/log/mysql:/var/log/mysql:ro
+      - /data/log/mysql:/var/log/mysql:rw
       # php和mysql通信
       - /var/run/mysqld:/var/run/mysqld:rw
     restart: always
