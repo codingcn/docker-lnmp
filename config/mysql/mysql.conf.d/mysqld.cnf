@@ -8,7 +8,7 @@ default-character-set=utf8mb4
 [mysqld]
 pid-file	= /var/run/mysqld/mysqld.pid
 #为了和php通信
-socket		= /tmp/mysql.sock
+socket		= /var/run/mysqld/mysql.sock
 datadir		= /var/lib/mysql
 log-error	= /var/log/mysql/error.log
 # By default we only accept connections from localhost
