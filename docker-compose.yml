@@ -35,20 +35,6 @@ services:
       - redis
     restart: always
 
-  redis:
-    image: redis:4.0.2
-    container_name: redis
-    ports:
-      - 6379:6379
-    volumes:
-      # redis 配置文件
-      - $PWD/config/redis:/etc/redis:ro
-      # redis 持久化数据存储
-      - /data/redis:/data/redis
-    # 以配置文件启动 redis
-    command: redis-server /etc/redis/redis.conf
-    restart: always
-
   mysql:
     image: mysql:5.7.20
     container_name: mysql
@@ -69,4 +55,17 @@ services:
       - /data/log/mysql:/var/log/mysql:rw
       # php和mysql通信
       - /var/run/mysqld:/var/run/mysqld:rw
+    restart: always
+  redis:
+    image: redis:4.0.2
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      # redis 配置文件
+      - $PWD/config/redis:/etc/redis:ro
+      # redis 持久化数据存储
+      - /data/redis:/data/redis
+    # 以配置文件启动 redis
+    command: redis-server /etc/redis/redis.conf
     restart: always
