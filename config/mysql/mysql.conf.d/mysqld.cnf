@@ -10,7 +10,7 @@ pid-file	= /var/run/mysqld/mysqld.pid
 #为了和php通信
 socket		= /var/run/mysqld/mysql.sock
 datadir		= /var/lib/mysql
-log-error	= /var/log/mysql/error.log
+# log-error	= /var/log/mysql/error.log
 # By default we only accept connections from localhost
 bind-address	= 0.0.0.0
 # Disabling symbolic-links is recommended to prevent assorted security risks
