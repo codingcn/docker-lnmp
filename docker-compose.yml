@@ -34,7 +34,7 @@ services:
       - redis
     restart: always
   mysql:
-    build: $PWD/build/mysql
+    image: mysql:5.7.20
     container_name: mysql
     # 配置环境变量
     environment:
