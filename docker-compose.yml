@@ -26,7 +26,7 @@ services:
     volumes:
       #  网站根目录
       - /data/www:/data/www
-      # php 配置文件
+      # php 配置文件，Dockerfile有写入配置命令,目录必须可写
       - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:rw
       # php和mysql通信
       - /var/run/mysqld:/var/run/mysqld:rw
