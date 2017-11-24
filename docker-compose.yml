@@ -18,9 +18,23 @@ services:
       # nginx 日志
       - /data/log/www/:/var/log/nginx:rw
     restart: always
-
+  php:
+    # Dockerfile 构建
+    build: $PWD/build/php
+    container_name: php
+    volumes:
+      #  网站根目录
+      - /data/www:/data/www
+      # php 配置文件
+      - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
+      # php和mysql通信
+      - /var/run/mysqld:/var/run/mysqld:rw
+    links:
+      - mysql
+      - redis
+    restart: always
   mysql:
-    build: $PWD/build/mysql
+    image: mysql:5.7.20
     container_name: mysql
     # 配置环境变量
     environment:
@@ -40,22 +54,6 @@ services:
       # php和mysql通信
       - /var/run/mysqld:/var/run/mysqld:rw
     restart: always
-  php:
-    # Dockerfile 构建
-    build: $PWD/build/php
-    container_name: php
-    volumes:
-      #  网站根目录
-      - /data/www:/data/www
-      # php 配置文件
-      - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
-      # php和mysql通信
-      - /var/run/mysqld:/var/run/mysqld:rw
-    links:
-      - mysql
-      - redis
-    restart: always
-
   redis:
     image: redis:4.0.2
     container_name: redis
@@ -65,7 +63,7 @@ services:
       # redis 配置文件
       - $PWD/config/redis:/etc/redis:ro
       # redis 持久化数据存储
-      - /data/redis:/data/redis:rw
+      - /data/redis:/data/redis
     # 以配置文件启动 redis
     command: redis-server /etc/redis/redis.conf
     restart: always
