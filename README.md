@@ -22,7 +22,7 @@ sudo systemctl restart docker
 ```
 ### 默认使用以下镜像，可自行修改
 ```
-nginx:1.13.6
+nginx:1.13.7
 mysql:5.7.20
 php:7.1.11-fpm
 redis:4.0.2
@@ -30,11 +30,22 @@ redis:4.0.2
 
 
 ### 开始使用
+
+权限(根据自定义配置来给权限)
+```
+mkdir -p /var/run/mysqld
+chmod -R 777 /var/run/mysqld
+
+mkdir -p /data/log/www/
+chmod -R 755 /data/log/www/
+```
+运行
 ```
 git clone https://github.com/codingcn/docker-lnmp.git
 cd docker-lnmp
 docker-compose up -d
 ```
+
 
 使用composer
 ```
