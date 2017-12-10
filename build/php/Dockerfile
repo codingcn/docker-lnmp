@@ -1,9 +1,14 @@
-FROM php:7.2.0-fpm
+FROM php:7.1-fpm
 
 MAINTAINER Alan <5303221@gmail.com>
 
 # 更新apt-get源 使用163的源
-RUN apt-get update && apt-get install -y \
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
+  echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib" >/etc/apt/sources.list && \
+  echo "deb http://mirrors.163.com/debian/ jessie-proposed-updates main non-free contrib" >>/etc/apt/sources.list && \
+  echo "deb-src http://mirrors.163.com/debian/ jessie main non-free contrib" >>/etc/apt/sources.list && \
+  echo "deb-src http://mirrors.163.com/debian/ jessie-proposed-updates main non-free contrib" >>/etc/apt/sources.list \
+  && apt-get update && apt-get install -y \
   libfreetype6-dev \
   libjpeg62-turbo-dev \
   libmcrypt-dev \
