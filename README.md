@@ -50,34 +50,26 @@ docker-compose up -d
 
 使用composer
 ```
-docker run --rm -it \
-  -v $(pwd):/usr/src/app \
-  -v ~/.composer:/home/composer/.composer \
-  -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
-  composer
-```
->或者不想每次使用composer都写那么一长串
-那么我们可以为主机添加一个别名
-
-
-```
-mkdir ~/alias
-vim  ~/alias/composer.sh
-
-#!/bin/bash
-docker run --rm -it -v $(pwd):/usr/src/app -v ~/.composer:/home/composer/.composer -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro composer $@
-
-
-chmod +x  ~/alias/composer.sh
-
-
-
 vim ~/.bashrc
-alias composer="~/alias/composer.sh"
+# 添加composer方法
+composer () {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --user $(id -u):$(id -g) \
+        --volume /etc/passwd:/etc/passwd:ro \
+        --volume /etc/group:/etc/group:ro \
+        --volume $(pwd):/app \
+        composer "$@"
+}
 
+# 生效
 source ~/.bashrc
 
-
+# 配置国内镜像
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
 ```
 这样就可以直接在主机上`composer something...`
