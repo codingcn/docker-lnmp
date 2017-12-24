@@ -22,6 +22,9 @@ services:
     # Dockerfile 构建
     build: $PWD/build/php
     container_name: php
+    ports:
+      # swoole
+      - 9501:9501
     volumes:
       #  网站根目录
       - /data/www:/data/www
