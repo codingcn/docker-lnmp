@@ -1,4 +1,4 @@
-# docker-compose安装nginx+php+mysql+redis
+# docker-compose安装nginx+php+mysql+redis+swoole
 ### 前置条件
 ```
 docker
@@ -26,6 +26,7 @@ nginx:1.13.7
 mysql:5.7.20
 php:7.1.11-fpm
 redis:4.0.2
+swoole:2
 ```
 
 

@@ -19,5 +19,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
   && docker-php-ext-install -j$(nproc) gd \
   && pecl install xdebug \
   && pecl install redis \
+  && pecl install swoole \
   && rm -rf /tmp/pear \
-  && docker-php-ext-enable xdebug redis 
+  && docker-php-ext-enable xdebug redis swoole
