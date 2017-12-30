@@ -74,4 +74,19 @@ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 ```
 这样就可以直接在主机上`composer something...`
 
+# 小技巧
+通过composer镜像使用的启发，我们同样可以在主机上为其它容器添加一些命令。
+比如：
+```
+vim ~/.bashrc
+# 添加php与mysql容器执行命令
+alias php='docker exec -it php php'
+alias mysql='docker exec -it mysql mysql'
+
+# 生效
+source ~/.bashrc
+```
+
+这样操作之后，我们就可以直接在主机下面直接运行容器内的php与mysql等命令了。
+
 >作者实测，配置好点的服务器，可实现三分钟搭建好lnmp，很爽有木有！
