@@ -1,7 +1,7 @@
 version: "3"
 services:
   nginx:
-    image: nginx:1.13.7
+    image: nginx:1.13.7-alpine
     container_name: nginx
     ports:
       # 将主机的 80 端口映射到容器的 80 端口
@@ -20,7 +20,7 @@ services:
     restart: always
   php:
     # Dockerfile 构建
-    build: $PWD/build/php
+    build: $PWD/build/php/php-7.2-fpm
     container_name: php
     ports:
       # swoole
@@ -58,7 +58,7 @@ services:
       - /var/run/mysqld:/var/run/mysqld:rw
     restart: always
   redis:
-    image: redis:4.0.2
+    image: redis:4.0.5-alpine
     container_name: redis
     ports:
       - 6379:6379
