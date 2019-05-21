@@ -1,8 +1,16 @@
-# docker-compose安装nginx+php+mysql+redis+swoole
+# docker-compose安装LNPM
 ### 前置条件
+* docker
+* [docker-compose](https://github.com/docker/compose/releases)
+
+### 默认使用以下镜像环境，可快速自定义修改
 ```
-docker
-docker-compose
+nginx:1.15.12
+mysql:8.0.16
+php:7.3.5-fpm
+redis:5.0.5
+swoole:4.3
+xdebug:2.7
 ```
 ### 如何使用Docker加速器
 >由于pull的是docker官方仓库的镜像，国内用户建议开启国内镜像加速，阿里云和网易蜂巢都有提供
@@ -20,14 +28,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
-### 默认使用以下镜像，可自行修改
-```
-nginx:1.13.7
-mysql:5.7.20
-php:7.1.11-fpm
-redis:4.0.2
-swoole:2
-```
+
 
 
 ### 开始使用
@@ -47,39 +48,13 @@ cd docker-lnmp
 docker-compose up -d
 ```
 
-
-使用composer
-```
-vim ~/.bashrc
-# 添加composer方法
-composer () {
-    tty=
-    tty -s && tty=--tty
-    docker run \
-        $tty \
-        --interactive \
-        --rm \
-        --user $(id -u):$(id -g) \
-        --volume /etc/passwd:/etc/passwd:ro \
-        --volume /etc/group:/etc/group:ro \
-        --volume $(pwd):/app \
-        composer "$@"
-}
-
-# 生效
-source ~/.bashrc
-
-# 配置国内镜像
-composer config -g repo.packagist composer https://packagist.phpcomposer.com
-```
-这样就可以直接在主机上`composer something...`
-
 # 小技巧
-通过composer镜像使用的启发，我们同样可以在主机上为其它容器添加一些命令。
+我们可以通过别名在主机上为其它容器添加一些快捷命令。
 比如：
 ```
 vim ~/.bashrc
 # 添加php与mysql容器执行命令
+alias composer='docker exec -it php composer'
 alias php='docker exec -it php php'
 alias mysql='docker exec -it mysql mysql'
 

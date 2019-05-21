@@ -1,27 +1,30 @@
-FROM php:7.1-fpm
+FROM php:7.3.5-fpm-stretch
 
 MAINTAINER Alan <5303221@gmail.com>
 
 # 更新apt-get源 使用163的源
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
-  echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib" >/etc/apt/sources.list && \
-  echo "deb http://mirrors.163.com/debian/ jessie-proposed-updates main non-free contrib" >>/etc/apt/sources.list && \
-  echo "deb-src http://mirrors.163.com/debian/ jessie main non-free contrib" >>/etc/apt/sources.list && \
-  echo "deb-src http://mirrors.163.com/debian/ jessie-proposed-updates main non-free contrib" >>/etc/apt/sources.list \
+  echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib" >/etc/apt/sources.list && \
+  echo "deb http://mirrors.163.com/debian/ stretch-proposed-updates main non-free contrib" >>/etc/apt/sources.list && \
+  echo "deb-src http://mirrors.163.com/debian/ stretch main non-free contrib" >>/etc/apt/sources.list && \
+  echo "deb-src http://mirrors.163.com/debian/ stretch-proposed-updates main non-free contrib" >>/etc/apt/sources.list \
   && apt-get update && apt-get install -y \
   libfreetype6-dev \
   libjpeg62-turbo-dev \
-  libmcrypt-dev \
   libpng-dev \
+  libzip-dev \
+  libmcrypt-dev \
   && docker-php-ext-install pdo_mysql mysqli sockets opcache zip\
-  && docker-php-ext-install -j$(nproc) mcrypt \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
-  && pecl install xdebug-2.5.0
+  && pecl install xdebug \
   && pecl install redis \
   && pecl install swoole \
+  # php从7.2开始不再在源码里支持mcrypt扩展而转到pecl方式支持
+  && pecl install mcrypt-1.0.2 \
   && rm -rf /tmp/pear \
-  && docker-php-ext-enable xdebug redis swoole
+  && docker-php-ext-enable xdebug redis swoole mcrypt
+
 
 # 安装composer并允许root用户运行
 ENV COMPOSER_ALLOW_SUPERUSER=1

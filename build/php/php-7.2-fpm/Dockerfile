@@ -24,3 +24,15 @@ RUN echo http://mirrors.aliyun.com/alpine/v3.7/main > /etc/apk/repositories; \
   && rm -rf /tmp/pear \
   && docker-php-ext-enable xdebug redis swoole  mcrypt mongodb \
   && apk del --no-cache linux-headers autoconf libmcrypt libmcrypt-dev libpng-dev postgresql-dev
+
+
+# 安装composer并允许root用户运行
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_NO_INTERACTION=1
+ENV COMPOSER_HOME=/usr/local/share/composer
+RUN mkdir -p /usr/local/share/composer \
+	&& curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
+	&& php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot \
+	&& rm -f /tmp/composer-setup.* \
+    # 配置composer中国全量镜像
+    && composer config -g repo.packagist composer https://packagist.phpcomposer.com
