@@ -17,7 +17,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
   && docker-php-ext-install pdo_mysql mysqli sockets opcache zip\
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
-  && pecl install xdebug-2.7 \
+  && pecl install xdebug-2.7.2 \
   && pecl install redis \
   # swoole 会和xdebug冲突
   # && pecl install swoole \

@@ -32,8 +32,6 @@ services:
       - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
       # php和mysql通信
       - /var/run/mysqld:/var/run/mysqld:rw
-      # php composer目录
-      - $HOME/.composer:/usr/local/share/composer:rw
     links:
       - mysql
       - redis

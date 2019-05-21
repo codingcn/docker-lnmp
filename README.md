@@ -11,6 +11,7 @@ php:7.3.5-fpm
 redis:5.0.5
 swoole:4.3(因为和xdebug冲突，默认注释了，需要的话可以自行打开)
 xdebug:2.7
+composer
 ```
 ### 如何使用Docker加速器
 >由于pull的是docker官方仓库的镜像，国内用户建议开启国内镜像加速，阿里云和网易蜂巢都有提供
@@ -48,14 +49,21 @@ cd docker-lnmp
 docker-compose up -d
 ```
 
+使用composer创建laravel项目示例：
+```
+# 注意这儿的目录需要指定的是/data/www/blog容器绝对路径，而不是blog
+docker exec -it php composer create-project --prefer-dist laravel/laravel /data/www/blog
+```
+
 # 小技巧
 我们可以通过别名在主机上为其它容器添加一些快捷命令。
 比如：
+
 ```
 vim ~/.bashrc
 # 添加php与mysql容器执行命令
-alias composer='docker exec -it php composer'
 alias php='docker exec -it php php'
+alias composer='docker exec -it php composer'
 alias mysql='docker exec -it mysql mysql'
 
 # 生效
