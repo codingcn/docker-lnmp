@@ -33,7 +33,7 @@ services:
       # php 配置文件
       - $PWD/config/php/conf.d:/usr/local/etc/php/conf.d:ro
       # php和mysql通信
-      - /var/run/mysqld:/var/run/mysqld:rw
+      - /tmp/mysqld:/tmp/mysqld:rw
     links:
       - mysql
       - redis
@@ -59,7 +59,7 @@ services:
       # mysql 日志
       - /data/logs/mysql:/var/log/mysql:rw
       # php和mysql通信
-      - /var/run/mysqld:/var/run/mysqld:rw
+      - /tmp/mysqld:/tmp/mysqld:rw
     restart: always
   redis:
     image: redis:5.0.5-alpine
