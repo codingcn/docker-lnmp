@@ -25,6 +25,8 @@ services:
     ports:
       # swoole
       - 9501:9501
+      # Laravel简易服务器端口 php /data/www/blog/artisan serve --host 0.0.0.0
+      - 8000:8000
     volumes:
       #  网站根目录
       - /data/www:/data/www
