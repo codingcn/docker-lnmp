@@ -49,10 +49,14 @@ cd docker-lnmp
 docker-compose up -d
 ```
 
-使用composer创建laravel项目示例：
+laravel 使用示例：
 ```
-# 注意这儿的目录需要指定的是/data/www/blog容器绝对路径，而不是blog
+# 创建laravel项目：注意这儿的目录需要指定的是/data/www/blog容器绝对路径，而不是blog
 docker exec -it php composer create-project --prefer-dist laravel/laravel /data/www/blog
+
+# 启动laravel，必须指定--host 0.0.0.0，配置docker-compose.yml关联了端口8000
+docker exec -it php php /data/www/blog/artisan serve --host 0.0.0.0
+
 ```
 
 # 小技巧
