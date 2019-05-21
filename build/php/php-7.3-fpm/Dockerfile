@@ -17,13 +17,15 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
   && docker-php-ext-install pdo_mysql mysqli sockets opcache zip\
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
-  && pecl install xdebug \
+  && pecl install xdebug-2.7 \
   && pecl install redis \
-  && pecl install swoole \
+  # swoole 会和xdebug冲突
+  # && pecl install swoole \
   # php从7.2开始不再在源码里支持mcrypt扩展而转到pecl方式支持
   && pecl install mcrypt-1.0.2 \
   && rm -rf /tmp/pear \
-  && docker-php-ext-enable xdebug redis swoole mcrypt
+  && docker-php-ext-enable xdebug redis mcrypt 
+  # swoole
 
 
 # 安装composer并允许root用户运行

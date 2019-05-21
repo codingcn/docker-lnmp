@@ -9,7 +9,7 @@ nginx:1.15.12
 mysql:8.0.16
 php:7.3.5-fpm
 redis:5.0.5
-swoole:4.3
+swoole:4.3(因为和xdebug冲突，默认注释了，需要的话可以自行打开)
 xdebug:2.7
 ```
 ### 如何使用Docker加速器
