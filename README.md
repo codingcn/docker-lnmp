@@ -31,7 +31,6 @@ sudo systemctl restart docker
 ```
 
 
-
 ### 开始使用
 
 权限(根据自定义配置来给权限)
@@ -54,6 +53,8 @@ laravel 使用示例：
 # 创建laravel项目：注意这儿的目录需要指定的是/data/www/blog容器绝对路径，而不是blog
 docker exec -it php composer create-project --prefer-dist laravel/laravel /data/www/blog
 
+# tips: composer install/require等命令需要进入容器才能执行（docker exec -it php bash）
+
 # 启动laravel，必须指定--host 0.0.0.0，配置docker-compose.yml关联了端口8000
 docker exec -it php php /data/www/blog/artisan serve --host 0.0.0.0
 
@@ -69,6 +70,7 @@ vim ~/.bashrc
 alias php='docker exec -it php php'
 alias composer='docker exec -it php composer'
 alias mysql='docker exec -it mysql mysql'
+alias redis-cli='docker exec -it redis redis-cli'
 
 # 生效
 source ~/.bashrc
